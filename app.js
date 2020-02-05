@@ -32,7 +32,7 @@ app.get('/', function(req, res) {
         res.render('login');
     } else {
 
-        res.redirect('/code');
+        res.redirect('/code/1');
     }
 
 })
@@ -55,7 +55,7 @@ app.post('/', async function(req, res) {
 
                 req.session.user = user[0]; //storing the current session
 
-                res.redirect('/code');
+                res.redirect('/code/1');
 
             } else {
                 res.redirect('/');
@@ -71,7 +71,7 @@ app.post('/', async function(req, res) {
 })
 
 // code page 
-app.get('/code', async function(req, res) {
+app.get('/code/:id', async function(req, res) {
     if (!req.session.user) {
         res.redirect('/');
     } else {
@@ -82,7 +82,7 @@ app.get('/code', async function(req, res) {
         }
 
         let data = await connection.statement('SELECT * FROM code');
-        res.render('code', { data: data, currUser: req.session.user, inCode: req.cookies['inc_code'] });
+        res.render('code', { data: data, currUser: req.session.user, inCode: req.cookies['inc_code'], cId: req.params.id });
     }
 
 })
@@ -117,7 +117,7 @@ app.post('/code', async function(req, res) {
         }
 
 
-        res.redirect('/code');
+        res.redirect('/code/2');
 
     }
 
@@ -150,10 +150,11 @@ app.get('/delete/:id', async function(req, res) {
 
 
     }
-    res.redirect('/code');
+    res.redirect('/code/2');
 
 })
 
+//export database as csv
 app.get('/csv', async function(req, res) {
 
     if (req.session.user) {
@@ -173,7 +174,16 @@ app.get('/csv', async function(req, res) {
 
 
 })
+app.get('/search', async function(req, res) {
+    if (req.session.user) {
+        res.redirect('/code/2');
+    } else {
+        res.redirect('/');
+    }
+})
 
+
+//search between dates
 app.post('/search', async function(req, res) {
 
     if (req.session.user) {
@@ -182,12 +192,12 @@ app.post('/search', async function(req, res) {
             try {
 
                 let data = await connection.statement('SELECT * FROM code WHERE DATE(created) BETWEEN ? AND ?', [startDate, endDate]);
-                res.render('code', { data: data, currUser: req.session.user, inCode: req.cookies['inc_code'] });
+                res.render('code', { data: data, currUser: req.session.user, inCode: req.cookies['inc_code'], cId: 2 });
             } catch (err) {
                 console.log(err);
             }
         } else {
-            res.redirect('/code');
+            res.redirect('/code/2');
         }
 
     } else {

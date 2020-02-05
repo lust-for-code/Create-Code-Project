@@ -17,3 +17,12 @@ CREATE TABLE code ( _id INTEGER AUTO_INCREMENT PRIMARY KEY,
                     userid INTEGER NOT NULL, 
                     created DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
                     FOREIGN KEY (userid) REFERENCES login(id)  ON DELETE RESTRICT ON UPDATE CASCADE );
+                    
+
+-- inserting  given values in the login table
+-- given passwords are already hashed to  store in database as Register page is not implemented in the application
+
+INSERT INTO login (id,email,password) VALUES(1,'demo@payu.in','$2a$10$ddKH/.ORgfpXfi1ipVuGnOQ0fiYHalRlwByoutmjoTgyc6VTit2f2');
+
+
+INSERT INTO login (id,email,password) VALUES(2,'machinetest@payu.in','$2a$10$ig1Vt0Jv0dLDd6CdROsASefUSgKgPk.hkqf8ETsY.WvpTec0hff2S');
