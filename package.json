@@ -1,0 +1,24 @@
+{
+    "name": "payu",
+    "version": "1.0.0",
+    "description": "Assignment for PayU ",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Saurabh Gupta",
+    "license": "ISC",
+    "dependencies": {
+        "alert-node": "^2.1.3",
+        "bcrypt-nodejs": "0.0.3",
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.4",
+        "dotenv": "^8.2.0",
+        "ejs": "^3.0.1",
+        "express": "^4.17.1",
+        "express-session": "^1.17.0",
+        "mysql": "^2.18.1",
+        "objects-to-csv": "^1.3.6"
+
+    }
+}
