@@ -9,7 +9,7 @@ CREATE TABLE login (id INTEGER PRIMARY KEY,
 -- creating code table
 
 CREATE TABLE code ( _id INTEGER AUTO_INCREMENT PRIMARY KEY, 
-                    _state VARCHAR(20) NOT NULL, 
+                    _state VARCHAR(40) NOT NULL, 
                     a_type VARCHAR(1) NOT NULL, 
                     d_type VARCHAR(1) NOT NULL, 
                     code VARCHAR(7) NOT NULL, 

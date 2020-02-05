@@ -174,6 +174,30 @@ app.get('/csv', async function(req, res) {
 
 })
 
+app.post('/search', async function(req, res) {
+
+    if (req.session.user) {
+        let { startDate, endDate } = req.body;
+        if (startDate && endDate) {
+            try {
+
+                let data = await connection.statement('SELECT * FROM code WHERE DATE(created) BETWEEN ? AND ?', [startDate, endDate]);
+                res.render('code', { data: data, currUser: req.session.user, inCode: req.cookies['inc_code'] });
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            res.redirect('/code');
+        }
+
+    } else {
+        res.redirect('/');
+    }
+
+
+
+})
+
 app.listen(port, function(req, res) {
     console.log('App running on port 3000');
 })
